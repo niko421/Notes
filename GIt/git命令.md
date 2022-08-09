@@ -20,7 +20,7 @@ branch就是在不影响master的情况下,复制一份master的记录到branch�
 
 ### 把文件添加add和提交commit到版本库
 
-Git 本地数据管理，大概可以分为三个区：
+ Git 本地数据管理，大概可以分为三个区：
 
 - 工作区（Working Directory）：是可以直接编辑的地方。
 - 暂存区（Stage/Index）：数据暂时存放的区域。
@@ -72,14 +72,17 @@ Git 本地数据管理，大概可以分为三个区：
 
 #####  rm test.txt
 
-直接删除
+删除工作区
 
-#####  git rm test.txt
+##### git rm -f test.txt
 
- git commit -m "remove test.txt"
-删错了，恢复
+从磁盘和暂存区中同时删除
 
-##### git checkout -- test.txt
+ 如果删除之前修改过并且已经放到暂存区域的话，则必须要用强制删除选项 -f（译注：即 force 的首字母）。 这是一种安全特性，用于防止误删还没有添加到快照的数据，这样的数据不能被 Git 恢复。 
+
+##### git rm --cached
+
+   删除了暂存区和版本库的文件 ，但保留工作区的文件 
 
 ### 远程仓库
 
