@@ -68,7 +68,7 @@ branch就是在不影响master的情况下,复制一份master的记录到branch�
 
 回滚到之前的版本.git reset --hard 后面的代码需要通过 git reflog 查看
 
-### 删除文件
+### 删除文件(删除文件之后,也可以commit来记录操作,并不一定add才能commit)
 
 #####  rm test.txt
 
@@ -82,7 +82,7 @@ branch就是在不影响master的情况下,复制一份master的记录到branch�
 
 ##### git rm --cached
 
-   删除了暂存区和版本库的文件 ，但保留工作区的文件 
+   删除了暂存区和版本库的文件 ，但保留工作区的文件 .如果文件有修改并 git add 到暂存区，再执行 git rm --cached 和 git commit，那么保留的工作区文件是修改后的文件，同时暂存区的修改文件和版本库的文件也被删了。 
 
 ### 远程仓库
 
