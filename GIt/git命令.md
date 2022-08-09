@@ -70,7 +70,7 @@ branch就是在不影响master的情况下,复制一份master的记录到branch�
 
 ##### git reset --soft HEAD^
 
-恢复最近一次 commit 回到上一次未提交状态
+恢复最近一次 commit, 回到上一次未提交状态,就是取消了上一次的commit
 
 ### 删除文件
 
