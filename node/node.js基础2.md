@@ -92,10 +92,6 @@ console.log(err);
      console.log(data);
  });
 
-作者：L同学啦啦啦
-链接：https://juejin.cn/post/7088650568150810638
-来源：稀土掘金
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 ```
 
 
@@ -188,3 +184,123 @@ const fs = require('fs');
 ```
 
 
+
+## http模块
+
+### 创建服务器
+
+```
+//导入http模块
+const http=require('http');
+//创建web服务器实例
+const server=http.createServer()
+//为服务器实例绑定request事件 监听客户端请求 调用回调函数处理事件
+server.on('request',function(req,res){
+    console.log("someone visit server");
+})
+//启动服务器
+server.listen(8080,function(){
+    console.log("server running at localhost:8080");
+})
+
+//按住ctrl C 停止服务
+```
+
+### 了解request请求对象
+
+```
+//导入http模块
+const http=require('http');
+//创建web服务器实例
+const server=http.createServer()
+//为服务器实例绑定request事件 监听客户端请求 调用回调函数处理事件
+
+server.on('request',(req,res)=>{
+    console.log("someone visit server");
+    //url是客户端请求的URL地址 端口号后面的地址 可以手动加 没有这个界面也可以
+    const url=req.url;
+    //method是客户端请求的method类型
+    const method=req.method;
+    let str=`Your request url: ${url} and method: ${method}`
+    //解决中文乱码
+     res.setHeader('Content-Type','text/html;charset=utf-8');
+    //调用res.end()方法 向客户端响应一些内容
+    res.end(str)
+
+})
+
+//启动服务器
+server.listen(8080,()=>{
+    console.log("server running at localhost:8080");
+})
+```
+
+### 根据不同的url响应不同的内容
+
+这里需要注意的是url是客户端手动输入的地址,服务器可以没有该文件,如果客户端输入的地址在服务器没有定义就会报错
+
+```
+const http = require('http');
+const server = http.createServer();
+
+server.on('request', (req, res) => {
+    //1.获取请求的url地址
+    const url = req.url;
+    //2.设置默认的响应内容为404 not found
+    let content = '404 not found';
+    //3.判断用户的请求是否为/index.html
+    //4.判断用户是否为about.html
+    if (url === '/' || url === '/index.html') {
+         content = `<h1>首页</h1>`
+    } else if (url === '/about.html') {
+         content = `<h1>关于页面</h1>`
+    }
+    //5.设置响应头 防止中文乱码
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+
+    //6.使用res.end()把内容响应给客户端
+    res.end(content);
+})
+
+server.listen('8080', () => {
+    console.log("server running at http://localhost:8080");
+});
+```
+
+### 将本地文件映射到web服务器访问
+
+```
+const http = require('http');
+const path = require('path');
+const fs = require('fs');
+
+const server = http.createServer();
+server.on('request', (req, res) => {
+    //1.获取请求的url地址
+    const url = req.url;
+    // //2.把请求的url地址映射为文件的存放路径
+    // //url就是客户端输入的地址 去拼接文件的绝对路径来访问文件内容
+
+    //需求:输入/也能访问index.html
+    //(1)设定空白的文件路径
+    let fpath = '';
+    if (url === '/') {
+        fpath = path.join(__dirname, '/files/index.html');
+    } else {
+        fpath = path.join(__dirname, '/files', url);
+    }
+    //3.根据映射过来的文件路径读取文件内容
+    fs.readFile(fpath, 'utf8', function (err, dataStr) {
+        //如果读取文件失败 向客户端响应固定德错误消息
+        if (err) { return res.end('404 not found'); }
+        res.end(dataStr);
+    })
+
+})
+
+server.listen('8080', () => {
+    console.log("server running at http://localhost:8080");
+});
+```
+
+或许将html代码响应给客户端就能解析成页面了?

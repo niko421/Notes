@@ -1,14 +1,18 @@
+## 写在前面
+
+![](C:\Users\86189\Desktop\笔记\js基础\DOM\imgs\image.png)
+
 ### 一些话
 
-`document.getElementById()` 获取到的结果既是 Node 也是 Element。
+​	document.getElementById()` 获取到的结果既是 Node 也是 Element。
 
-Element 一定是 Node，但 Node 不一定是 Element，也可能是文本、空格和换行符。
+​	Element 一定是 Node，但 Node 不一定是 Element，也可能是文本、空格和换行符。
 
-NodeList 里的换行符是因为原始代码中， HTML 标签与标签、内容与标签之间换行而产生的。
+​	NodeList 里的换行符是因为原始代码中， HTML 标签与标签、内容与标签之间         换行而产生的。
 
-单个的 HTML 标签算是一个单独的 Node。
+ 	单个的 HTML 标签算是一个单独的 Node。
 
-针对非 HTML标签（比如文本、空格等），从一个 HTML 标签开始，到碰到的第一个 HTML 标签为止，如果中间由内容（文本、空格等），那这部分内容算是一个 Node。
+​	针对非 HTML标签（比如文本、空格等），从一个 HTML 标签开始，到碰到的第一个 HTML 标签为止，如果中间由内容（文本、空格等），那这部分内容算是一个 Node。
 
 - DOM（Document Object Model）： 文档对象模型
 - 其实就是操作 html 中的标签的一些能力
@@ -24,6 +28,20 @@ NodeList 里的换行符是因为原始代码中， HTML 标签与标签、内�
 - DOM 的核心对象就是 docuemnt 对象
 - document 对象是浏览器内置的一个对象，里面存储着专门用来操作元素的各种方法
 - DOM： 页面中的标签，我们通过 js 获取到以后，就把这个对象叫做 DOM 对象
+
+# DOM
+
+## DOM简介
+
+文档对象模型(Document Object Model)
+
+Dom树
+![](C:\Users\86189\Desktop\笔记\js基础\DOM\imgs\DomTree.png)
+
+-  文档：一个页面就是一个文档，DOM 中使用 document 表示 
+- 元素：页面中的所有标签都是元素，DOM 中使用 element 表示
+-  节点：网页中的所有内容都是节点（标签、属性、文本、注释等）,DOM 中使用 node 表示 HTML DOM树中的所有节点均可通过 JavaScript 进行访问，所有 HTML 元素（节点）均可被修改，也可以创建或删除 .
+- DOM 把以上内容都看做是对象 
 
 ## 获取元素
 
@@ -116,10 +134,22 @@ console.log(docuemnt.querySelectorAll('.box')) // 获取页面中所有有 box �
 
 - 获取到的是一组数据，也是需要用索引来获取到准确的每一个 DOM 元素
 
+###  特殊元素获取
+
+####          doucumnet.body , doucumnet.head 
+
+​            获取body元素 
+
+####          document.documentElement 
+
+​            获取html元素 
+
 ## 操作属性
 
 - 通过我们各种获取元素的方式获取到页面中的标签以后
 - 我们可以直接操作 DOM 元素的属性，就能直接把效果展示在页面上
+
+![](C:\Users\86189\Desktop\笔记\js基础\DOM\imgs\operationElement.png)
 
 ### innerHTML
 
@@ -307,4 +337,19 @@ console.log(docuemnt.querySelectorAll('.box')) // 获取页面中所有有 box �
 ```
 
 - 在设置的时候，不管之前有没有类名，都会全部被设置的值覆盖
+
+### data- (建议使用这种方式自定义属性)
+
+​     设置H5目定义属性
+​      H5规定自定义属性data-开头做为属性名并且赋值，比如:
+
+```
+<div data-index:="1"></div>
+```
+
+​      或者使用JS设置，
+
+```
+element.setAttribute(data-index',2)
+```
 
