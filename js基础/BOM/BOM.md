@@ -9,7 +9,7 @@
 - 操作浏览器的滚动条
 - 浏览器的信息（浏览器的版本）
 - 让浏览器出现一个弹出框（alert/confirm/prompt）
-- BOM 的核心就是 window 对象
+- BOM 的核心就是 **window 对象**
 - window 是浏览器内置的一个对象，里面包含着操作浏览器的方法
 
 ### 获取浏览器窗口的尺寸
@@ -64,17 +64,19 @@ console.log(str)复制代码
 
 ![img](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/7/30/1739d62f5bb86b02~tplv-t2oaga2asx-zoom-in-crop-mark:3024:0:0:0.awebp)
 
-### 浏览器的地址信息
+## location对象
 
 - 在 window 中有一个对象叫做 location 
 - 就是专门用来存储浏览器的地址栏内的信息的
+
+![](C:\Users\86189\Desktop\笔记\js基础\BOM\imgs\location.png)
 
 ### location.href
 
 - location.href 这个属性存储的是浏览器地址栏内 url 地址的信息
 
 ```javascript
-console.log(window.location.href)复制代码
+console.log(window.location.href)
 ```
 
 - 会把中文编程 url 编码的格式
@@ -85,32 +87,34 @@ window.location.href = './index.html'
 // 这个就会跳转页面到后面你给的那个地址复制代码
 ```
 
-### location.reload
+### location.reload( )
 
 - location.reload() 这个方法会重新加载一遍页面，就相当于刷新是一个道理
 
 ```javascript
-window.location.reload()复制代码
+window.location.reload()
 ```
 
 - 注意： 不要写在全局，不然浏览器就会一直处在刷新状态
 
-### 浏览器的历史记录
+## history对象
 
 - window 中有一个对象叫做 history 
 - 是专门用来存储历史记录信息的
 
-### history.back
+![](C:\Users\86189\Desktop\笔记\js基础\BOM\imgs\history.png)
 
-- history.back 是用来会退历史记录的，就是回到前一个页面，就相当于浏览器上的 ⬅️ 按钮 window.history.back() 
+### history.back( )
+
+- history.back 是用来会退历史记录的，就是回到前一个页面，就相当于浏览器上的 ⬅️ 按钮 window.history.back( ) 
 - 前提是你要有上一条记录，不然就是一直在这个页面，也不会回退
 
-### history.forword
+### history.forword( )
 
 - history.forword 是去到下一个历史记录里面，也就是去到下一个页面，就相当于浏览器上的 ➡️ 按钮 window.history.forward() 
 - 前提是你要之前有过回退操作，不然的话你现在就是最后一个页面，没有下一个
 
-### 浏览器的版本信息（了解）
+## 浏览器的版本信息navigator（了解）
 
 - window 中有一个对象叫做 navigator
 - 是专门用来获取浏览器信息的
@@ -148,7 +152,7 @@ console.log(window.navigator.appVersion)复制代码
 console.log(window.navigator.platform)复制代码
 ```
 
-### 浏览器的 onload 事件
+## 浏览器的 onload 事件
 
 - 这个不在是对象了，而是一个事件
 - 是在页面所有资源加载完毕后执行的
@@ -205,7 +209,7 @@ window.onload = function () {
 </html>复制代码
 ```
 
-### 浏览器的 onscroll 事件
+## 浏览器的 onscroll 事件
 
 - 这个 onscroll 事件是当浏览器的滚动条滚动的时候触发
 - 或者鼠标滚轮滚动的时候出发
@@ -272,11 +276,11 @@ window.onscroll = function () {
 
 - 两个之间的区别和之前的 scrollTop 一样
 
-### 定时器
+## 定时器
 
 - 在 js 里面，有两种定时器，倒计时定时器 和 间隔定时器
 
-### 倒计时定时器
+### 倒计时定时器setTimeout
 
 - 倒计时多少时间以后执行函数
 - 语法： setTimeout(要执行的函数，多长时间以后执行)
@@ -294,7 +298,7 @@ console.log(timerId) // 1复制代码
 - 只执行一次，就不在执行了
 - 返回值是，当前这个定时器是页面中的第几个定时器
 
-### 间隔定时器
+### 间隔定时器setInterval
 
 - 每间隔多少时间就执行一次函数
 - 语法： setInterval(要执行的函数，间隔多少时间)
