@@ -392,8 +392,10 @@ app.listen(8000, () => {
                 },
                 // 指定当前发送的请求为jsonp请求
                 dataType:"jsonp",
-                // 指定函数名称  在没有success函数的情况下, 可以替代success函数
-                jsonpCallback:"fnName",
+                // 可选，向服务器端传递函数名字的参数名称
+                jsonp: 'cb',
+                // 可选，指定函数名称，若不想用 success 函数时指定，需要提前在全局定义好该函数
+                 jsonCallback: 'fnName',
                 success:function( res ){
                     
                 },
