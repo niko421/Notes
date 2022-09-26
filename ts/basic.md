@@ -1,4 +1,4 @@
-### 基本数据类型
+### 1.基本数据类型
 
 >  原始数据类型包括：布尔值、数值、字符串、`null`、`undefined` 以及 ES6 中的新类型 [`Symbol`](http://es6.ruanyifeng.com/#docs/symbol) 和 ES10 中的新类型 [`BigInt`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/BigInt)。 
 
@@ -94,11 +94,7 @@
   // Type 'void' is not assignable to type 'number'.
   ```
 
-
-
-
-
-### any
+### 2.any
 
  任意值（Any）用来表示允许赋值为任意类型。 
 
@@ -119,7 +115,63 @@
 
 
 
-### 类型推论
+### 3.unknow
+
+- unknown 可以定义任何类型的值
+
+  ```
+  let value: unknown;
+   
+  value = true;             // OK
+  value = 42;               // OK
+  value = "Hello World";    // OK
+  value = [];               // OK
+  value = {};               // OK
+  value = null;             // OK
+  value = undefined;        // OK
+  value = Symbol("type");   // OK
+  
+  ```
+
+
+
+#### any和unknow区别
+
+- unknow类型不能作为子类型只能作为父类型 any可以作为父类型和子类型
+
+- unknown类型不能赋值给其他类型
+
+- ```
+  //报错
+  let names:unknown = '123'
+  let names2:string = names
+   
+  //这样就没问题 any类型是可以的
+  let names:any = '123'
+  let names2:string = names   
+   
+  //unknown可赋值对象只有unknown 和 any
+  let b:unknown = '123'
+  let a:any= '456'
+   
+  a = b
+  ```
+
+  ```
+  如果是any类型在对象没有这个属性的时候还在获取是不会报错的
+  let obj:any = {b:1}
+  obj.a
+   
+   
+  如果是unknow 是不能调用属性和方法
+  let obj:unknown = {b:1,ccc:():number=>213}
+  obj.b
+  obj.ccc()
+  ```
+
+  
+
+### 4.类型推论
 
 -  TypeScript 会在没有明确的指定类型的时候推测出一个类型，这就是类型推论。 
 
@@ -132,7 +184,7 @@
 
 
 
-### 联合类型
+### 5.联合类型
 
 -  联合类型（Union Types）表示取值可以为多种类型中的一种。 
 
@@ -198,7 +250,7 @@
 
 
 
-### 类型别名
+### 6.类型别名
 
 -  我们使用 `type` 创建类型别名 
 
@@ -217,7 +269,7 @@
 
   
 
-### 枚举
+### 7.枚举
 
 -  枚举（Enum）类型用于取值被限定在一定范围内的场景，比如一周只能有七天，颜色限定为红绿蓝等。 
 
@@ -258,7 +310,11 @@
 
 - 上面的例子中，未手动赋值的枚举项会接着上一个枚举项**递增。**
 
-### 对象的类型——接口
+
+
+### 8.对象的类型——接口
+
+
 
 #### 什么是接口
 
@@ -321,7 +377,7 @@
 
 
 
-#### 可选属性(不建议用)
+#### 可选属性
 
 - 有时我们希望不要完全匹配一个形状，那么可以用可选属性：
   - ```ts
@@ -459,7 +515,7 @@
 
 
 
-### 数组的类型
+### 9.数组的类型
 
 #### : 类型 + 方括号  表示法
 
@@ -612,7 +668,9 @@
   // Argument of type 'true' is not assignable to parameter of type 'string | number'.
   ```
 
-### 函数的类型
+
+
+### 10.函数的类型
 
 
 
@@ -800,7 +858,7 @@
 
 #### 重载
 
-- 重载允许一个函数接受不同数量或类型的参数时，作出不同的处理。
+- 重载允许一个函数接受不同数量或类型的参数时，作出不同的处理,和返回值无关.
 
 - 比如，我们需要实现一个函数 `reverse`，输入数字 `123` 的时候，输出反转的数字 `321`，输入字符串 `'hello'` 的时候，输出反转的字符串 `'olleh'`。
 

@@ -68,21 +68,23 @@ test<number, string>(10, "hello");
 
 使用泛型时，完全可以将泛型当成是一个普通的类去使用；
 
-### 泛型类
+#### 处理多个函数参数
 
-类中同样可以使用泛型：
+我们用 T 代表第 0 项的类型，用 U 代表第 1 项的类型。
 
-```typescript
-class MyClass<T>{
-  prop: T;
-
-  constructor(prop: T){
-      this.prop = prop;
-  }
+```TypeScript
+function swap<T, U>(tuple: [T, U]): [U, T]{
+    return [tuple[1], tuple[0]]
 }
 ```
 
-### 泛型继承
+传入的参数里，第 0 项为 string 类型，第 1 项为 number 类型。
+
+在交换函数的返回值里，第 0 项为 number 类型，第 1 项为 string 类型。
+
+
+
+### 约束泛型
 
 除此之外，也可以对泛型的范围进行约束
 
@@ -96,4 +98,71 @@ function test<T extends MyInter>(arg: T): number{
 }
 ```
 
+ 这其中的关键就是<T extends MyInter >，这样就能约束泛型。 
+
 使用T extends MyInter表示泛型T必须是MyInter的子类，不一定非要使用接口类和抽象类同样适用；
+
+
+
+
+
+## 泛型的一些应用
+
+### 泛型约束类
+
+定义一个栈，有入栈和出栈两个方法，如果想入栈和出栈的元素类型统一，就可以这么写：
+
+```TypeScript
+class Stack<T> {
+    private data: T[] = []
+    push(item:T) {
+        return this.data.push(item)
+    }
+    pop():T | undefined {
+        return this.data.pop()
+    }
+}
+```
+
+在定义实例的时候写类型，比如，入栈和出栈都要是 number 类型，就这么写：
+
+```TypeScript
+const s1 = new Stack<number>()
+```
+
+
+
+### 泛型约束接口
+
+使用泛型，也可以对 interface 进行改造，让 interface 更灵活。
+
+```TypeScript
+interface IKeyValue<T, U> {
+    key: T
+    value: U
+}
+
+const k1:IKeyValue<number, string> = { key: 18, value: 'lin'}
+const k2:IKeyValue<string, number> = { key: 'lin', value: 18}
+```
+
+
+
+### 泛型定义数组
+
+定义一个数组，我们之前是这么写的：
+
+```TypeScript
+const arr: number[] = [1,2,3]
+
+```
+
+现在这么写也可以：
+
+```TypeScript
+const arr: Array<number> = [1,2,3]
+```
+
+
+
+### 
