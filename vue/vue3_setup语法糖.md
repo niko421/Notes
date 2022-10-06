@@ -1,4 +1,4 @@
-1.setup语法糖简介
+ 1.setup语法糖简介
 
 直接在script标签中添加setup属性就可以直接使用setup语法糖了。 使用setup语法糖后，
 
@@ -696,4 +696,3 @@ webpack.config.js配置
 最后要在index.html 引入cdn 
 
  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-
